@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garimpo do Bigode - Acesso</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+<script>
+tailwind.config={darkMode:'class',theme:{extend:{colors:{cyber:{bg:'#0b0f19',card:'#121827',cardBorder:'#1f293d',neonGreen:'#00ff88',neonCyan:'#00d2ff',neonGold:'#ffd700',magenta:'#ff0055'}},fontFamily:{orbitron:['Orbitron','sans-serif'],sans:['Inter','sans-serif']}}}};
+</script>
+<style>
+body{background-color:#0b0f19;color:#f1f5f9;font-family:Inter,sans-serif;overflow-x:hidden;background-image:radial-gradient(circle at 50% 0%,rgba(0,255,136,.08) 0%,transparent 60%),radial-gradient(circle at 80% 80%,rgba(0,210,255,.05) 0%,transparent 50%)}
+.glass-panel{background:rgba(18,24,39,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 32px #0006}
+.glass-panel:hover{border-color:rgba(0,255,136,.25)}
+.glow-green{box-shadow:0 0 25px #00ff8866,inset 0 0 15px #00ff8833}.glow-gold{box-shadow:0 0 25px #ffd70066,inset 0 0 15px #ffd70033}
+.text-glow-green{text-shadow:0 0 12px #00ff8899}.text-glow-cyan{text-shadow:0 0 12px #00d2ff99}.text-glow-gold{text-shadow:0 0 12px #ffd70099}
+.reactor-btn{position:relative;transition:all .4s cubic-bezier(.175,.885,.32,1.275)}
+.reactor-btn:before{content:'';position:absolute;inset:-12px;border-radius:50%;border:2px dashed #00ff88;animation:spin 14s linear infinite;opacity:.7}
+.reactor-btn:after{content:'';position:absolute;inset:-24px;border-radius:50%;border:1px solid #00d2ff;opacity:.3;animation:pulse-ring 2.5s infinite}
+.reactor-btn.garimpando:before{animation:spin 1.2s linear infinite;border-color:#ffd700}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes pulse-ring{0%,100%{transform:scale(.95);opacity:.8}50%{transform:scale(1.1);opacity:.2}}
+.radar-sweep{background:conic-gradient(from 0deg at 50% 50%,#00ff8866 0deg,transparent 60deg,transparent 360deg);animation:sweep 2s linear infinite}
+@keyframes sweep{to{transform:rotate(360deg)}}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#0b0f19}::-webkit-scrollbar-thumb{background:#1f293d;border-radius:4px}
+.field{width:100%;background:#0f172a;border:1px solid #334155;border-radius:12px;padding:11px 14px;color:white;font-size:14px;outline:none}
+.field:focus{border-color:#00ff88}.hidden-view{display:none!important}
+</style>
+</head>
+<body class="min-h-screen flex flex-col">
+<div id="loginView" class="min-h-screen flex items-center justify-center p-4">
+  <div class="glass-panel rounded-3xl p-7 md:p-9 w-full max-w-md">
+    <div class="text-center mb-7">
+      <div class="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyber-neonGreen via-cyber-neonCyan to-cyber-neonGold p-[2px] mb-4"><div class="w-full h-full bg-cyber-bg rounded-2xl flex items-center justify-center text-cyber-neonGreen text-3xl"><i class="fa-solid fa-mustache"></i></div></div>
+      <h1 class="font-orbitron text-2xl font-black">GARIMPO DO <span class="text-cyber-neonGreen text-glow-green">BIGODE</span></h1>
+      <p class="text-slate-400 text-xs mt-2">Entre com seu usuário e senha para continuar</p>
+    </div>
+    <form id="loginForm" class="space-y-4">
+      <div><label class="block text-xs text-slate-400 mb-1">Usuário</label><input id="loginUsername" class="field" autocomplete="username" required></div>
+      <div><label class="block text-xs text-slate-400 mb-1">Senha</label><input id="loginPassword" type="password" class="field" autocomplete="current-password" required></div>
+      <button id="loginButton" class="w-full bg-cyber-neonGreen text-black font-black rounded-xl py-3 font-mono hover:bg-emerald-300 transition" type="submit">ENTRAR NO GARIMPO</button>
+      <p id="loginMessage" class="text-sm text-center text-rose-400 min-h-5"></p>
+    </form>
+    <p class="text-[11px] text-slate-500 text-center mt-5">Acesso individual. Em caso de problemas, fale com o administrador.</p>
+  </div>
+</div>
+
+<div id="appView" class="hidden-view min-h-screen flex flex-col">
+<header class="w-full glass-panel border-b border-slate-800 sticky top-0 z-40 px-4 py-3">
+ <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+  <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+   <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyber-neonGreen via-cyber-neonCyan to-cyber-neonGold p-[2px]"><div class="w-full h-full bg-cyber-bg rounded-[14px] flex items-center justify-center text-cyber-neonGreen text-2xl"><i class="fa-solid fa-mustache"></i></div></div>
+   <div><h1 class="font-orbitron text-lg md:text-xl font-black tracking-wider">GARIMPO DO <span class="text-cyber-neonGreen text-glow-green">BIGODE</span></h1><p class="text-xs text-slate-400">Motor de inteligência para garimpo de produtos</p></div>
+  </div>
+  <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+   <span id="userLabel" class="text-slate-300"></span>
+   <button id="adminNavButton" onclick="abrirAdmin()" class="hidden-view bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl border border-slate-700"><i class="fa-solid fa-users-gear text-cyber-neonCyan mr-1"></i> Administração</button>
+   <button onclick="toggleApiModal()" class="bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl border border-slate-700"><i class="fa-solid fa-brain text-cyber-neonGold mr-1"></i> Chave IA</button>
+   <button onclick="logout()" class="bg-rose-950/60 hover:bg-rose-900 px-3 py-2 rounded-xl border border-rose-900"><i class="fa-solid fa-right-from-bracket mr-1"></i> Sair</button>
+  </div>
+ </div>
+</header>
+
+<main id="garimpoMain" class="max-w-7xl mx-auto w-full px-4 py-8 flex-1 flex flex-col items-center">
+ <section class="w-full glass-panel rounded-2xl p-5 mb-8">
+  <div class="flex items-start gap-3"><div class="p-2.5 rounded-xl bg-cyber-neonGreen/10 border border-cyber-neonGreen/30 text-cyber-neonGreen"><i class="fa-solid fa-robot text-xl"></i></div><div><h3 class="font-orbitron font-bold text-sm md:text-base">Garimpeiro de Inteligência Artificial</h3><p class="text-xs text-slate-300 mt-1 max-w-3xl leading-relaxed">Use sua própria chave Gemini para consultar a IA e organizar ideias de produtos para anunciar. Os preços e a procura precisam ser conferidos antes de vender.</p></div></div>
+ </section>
+ <section class="w-full flex flex-col items-center text-center my-4 relative">
+  <div class="inline-flex items-center gap-2 bg-emerald-500/10 text-cyber-neonGreen px-4 py-1.5 rounded-full border border-cyber-neonGreen/30 text-xs font-mono mb-6"><i class="fa-solid fa-bolt"></i><span>SEM ESTOQUE | SUA CHAVE IA | VOCÊ NO CONTROLE</span></div>
+  <h2 class="text-3xl md:text-5xl font-orbitron font-black max-w-4xl leading-tight mb-4">GARIMPE PRODUTOS PARA ANUNCIAR NO <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-neonGreen via-cyber-neonCyan to-cyber-neonGold">OLX E FACEBOOK</span></h2>
+  <p class="text-slate-400 max-w-2xl text-sm md:text-base mb-10">Consulte a IA para gerar ideias de produtos, estimativas e textos iniciais de anúncio.</p>
+  <div class="relative my-6 flex items-center justify-center"><div id="radarScanner" class="hidden-view absolute w-72 h-72 rounded-full radar-sweep pointer-events-none opacity-40"></div>
+   <button id="garimparBtn" onclick="iniciarGarimpoIA()" class="reactor-btn w-48 h-48 md:w-60 md:h-60 rounded-full bg-gradient-to-br from-slate-900 via-cyber-card to-slate-950 border-4 border-cyber-neonGreen flex flex-col items-center justify-center shadow-2xl hover:scale-105 active:scale-95 group"><div class="w-full h-full rounded-full flex flex-col items-center justify-center bg-black/40 p-4"><i class="fa-solid fa-mustache text-4xl text-cyber-neonGreen mb-3"></i><span id="btnText" class="font-orbitron font-black text-base md:text-xl tracking-widest text-glow-green">GARIMPAR COM O BIGODE</span><span class="text-[10px] font-mono text-slate-400 mt-1">CLIQUE PARA CONSULTAR A IA</span></div></button>
+  </div>
+  <div id="terminalContainer" class="w-full max-w-2xl mt-6 hidden-view"><div class="glass-panel rounded-xl p-4 text-left font-mono text-xs bg-black/90"><div class="flex justify-between border-b border-slate-800 pb-2 mb-2 text-slate-500"><span><i class="fa-solid fa-terminal text-cyber-neonGreen"></i> Terminal Bigode Engine</span><span id="terminalStatus" class="text-cyber-neonGold">Consultando...</span></div><div id="terminalLogs" class="h-28 overflow-y-auto space-y-1.5 text-slate-300"></div></div></div>
+ </section>
+ <section id="resultsSection" class="w-full mt-12 hidden-view">
+  <div class="flex flex-col md:flex-row justify-between gap-4 mb-8 border-b border-slate-800 pb-4"><div><h3 class="font-orbitron text-xl font-bold"><i class="fa-solid fa-fire text-cyber-neonGold"></i> Achados do Garimpo (<span id="totalFoundCount" class="text-cyber-neonGreen">0</span>)</h3><p class="text-xs text-slate-400">Sugestões geradas pela IA; confira fornecedor, preço e disponibilidade.</p></div>
+   <div class="flex flex-wrap gap-2"><button onclick="filterCategory('todos',this)" class="cat-filter-btn px-4 py-2 rounded-xl text-xs bg-cyber-neonGreen text-black">Todos</button><button onclick="filterCategory('gadget',this)" class="cat-filter-btn px-4 py-2 rounded-xl text-xs bg-slate-800">⌚ Tecnologia</button><button onclick="filterCategory('casa',this)" class="cat-filter-btn px-4 py-2 rounded-xl text-xs bg-slate-800">🏡 Casa</button><button onclick="filterCategory('ferramentas',this)" class="cat-filter-btn px-4 py-2 rounded-xl text-xs bg-slate-800">🛠️ Ferramentas</button><button onclick="filterCategory('auto',this)" class="cat-filter-btn px-4 py-2 rounded-xl text-xs bg-slate-800">🚗 Automotivo</button></div>
+  </div><div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+ </section>
+
+ <section class="w-full mt-16 glass-panel rounded-2xl p-6 md:p-8"><div class="grid lg:grid-cols-2 gap-8 items-center">
+  <div class="space-y-4"><div class="flex items-center gap-3"><i class="fa-solid fa-calculator text-cyber-neonGold text-2xl"></i><div><h3 class="font-orbitron font-bold text-lg">Calculadora de Margem do Bigode</h3><p class="text-xs text-slate-400">Simule o resultado antes de anunciar.</p></div></div>
+   <div class="grid sm:grid-cols-2 gap-4"><div><label class="block text-xs text-slate-400 mb-1">Custo no fornecedor (R$)</label><input type="number" id="calcCusto" value="50" oninput="calcularMargemRapida()" class="field"></div><div><label class="block text-xs text-slate-400 mb-1">Preço de venda (R$)</label><input type="number" id="calcVenda" value="130" oninput="calcularMargemRapida()" class="field"></div></div>
+   <div><label class="block text-xs text-slate-400 mb-1">Frete / entrega (R$)</label><input type="number" id="calcFrete" value="15" oninput="calcularMargemRapida()" class="field"></div>
+   <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex justify-between"><div><span class="text-xs text-slate-400 block">Resultado estimado por venda</span><span id="resLucroUnidade" class="font-orbitron font-black text-2xl text-cyber-neonGreen">R$ 65,00</span></div><div class="text-right"><span class="text-xs text-slate-400 block">Margem sobre o custo</span><span id="resMargemPorcent" class="font-mono font-bold text-cyber-neonGold">130%</span></div></div>
+  </div>
+  <div class="bg-slate-950 rounded-xl p-6 border border-slate-800"><h4 class="font-orbitron text-xs text-slate-400 uppercase mb-4">Simulação mensal (não é garantia de vendas)</h4><div class="space-y-4"><div class="flex justify-between text-xs"><span>1 venda/dia · 30 vendas</span><b id="proj1Venda" class="text-cyber-neonGreen">R$ 1.950,00</b></div><div class="flex justify-between text-xs"><span>3 vendas/dia · 90 vendas</span><b id="proj3Vendas" class="text-cyber-neonGold">R$ 5.850,00</b></div><div class="flex justify-between text-xs"><span>5 vendas/dia · 150 vendas</span><b id="proj5Vendas" class="text-cyber-neonCyan">R$ 9.750,00</b></div></div><p class="mt-6 pt-4 border-t border-slate-800 text-[11px] text-slate-400">Valores ilustrativos. Considere taxas, devoluções, impostos e custos não incluídos.</p></div>
+ </div></section>
+ <section class="w-full mt-16 glass-panel rounded-2xl p-6 md:p-10 text-center"><span class="text-cyber-neonGold text-xs font-mono">CULTURA E ESTRATÉGIA</span><h3 class="font-orbitron font-black text-2xl md:text-3xl mt-3">Afinal, o que é ser <span class="text-cyber-neonGold">BIGODE</span>?</h3><p class="text-slate-300 text-sm md:text-base leading-relaxed mt-4 max-w-4xl mx-auto">Na cultura paulista, o Bigode é aquela pessoa desenrolada e estrategicamente prática. É resolver o problema de um jeito inteligente, sem enrolação, usando ferramentas para trabalhar melhor.</p><h4 class="font-orbitron font-black text-xl mt-6 text-cyber-neonGreen">"SOMOS TODOS BIGODE. VAMOS AOS LUCROS!"</h4></section>
+</main>
+
+<section id="adminView" class="hidden-view max-w-7xl mx-auto w-full px-4 py-8 flex-1">
+ <div class="flex flex-wrap justify-between items-center gap-3 mb-6"><div><h2 class="font-orbitron text-2xl font-black">PAINEL <span class="text-cyber-neonGreen">ADMINISTRATIVO</span></h2><p class="text-sm text-slate-400 mt-1">Gerencie os acessos dos clientes.</p></div><button onclick="fecharAdmin()" class="bg-slate-800 px-4 py-2 rounded-xl text-sm"><i class="fa-solid fa-arrow-left mr-2"></i>Voltar ao Garimpo</button></div>
+ <div class="grid lg:grid-cols-3 gap-6">
+  <div class="glass-panel rounded-2xl p-5"><h3 class="font-orbitron font-bold mb-4"><i class="fa-solid fa-user-plus text-cyber-neonGreen mr-2"></i>Novo cliente</h3>
+   <form id="createUserForm" class="space-y-3"><div><label class="text-xs text-slate-400">Nome</label><input id="newName" class="field" required></div><div><label class="text-xs text-slate-400">Usuário</label><input id="newUsername" class="field" required autocomplete="off"></div><div><label class="text-xs text-slate-400">Senha (mínimo 12 caracteres)</label><input id="newPassword" type="password" minlength="12" class="field" required autocomplete="new-password"></div><div><label class="text-xs text-slate-400">Acesso até (opcional)</label><input id="newExpiry" type="date" class="field"></div><button class="w-full bg-cyber-neonGreen text-black font-bold py-3 rounded-xl" type="submit">CADASTRAR CLIENTE</button><p id="createMessage" class="text-xs min-h-4"></p></form>
+  </div>
+  <div class="lg:col-span-2 glass-panel rounded-2xl p-5"><div class="flex flex-wrap justify-between items-center gap-3 mb-4"><h3 class="font-orbitron font-bold"><i class="fa-solid fa-users text-cyber-neonCyan mr-2"></i>Clientes cadastrados</h3><button onclick="carregarUsuarios()" class="text-xs bg-slate-800 px-3 py-2 rounded-lg"><i class="fa-solid fa-rotate mr-1"></i>Atualizar</button></div><p id="usersMessage" class="text-xs text-slate-400 mb-3"></p><div class="overflow-x-auto"><table class="w-full text-left text-xs min-w-[650px]"><thead class="text-slate-400 border-b border-slate-700"><tr><th class="p-2">Nome</th><th class="p-2">Usuário</th><th class="p-2">Status</th><th class="p-2">Validade</th><th class="p-2">Ações</th></tr></thead><tbody id="usersTable"></tbody></table></div></div>
+ </div>
+</section>
+
+<footer class="w-full glass-panel border-t border-slate-800 py-6 px-4 mt-16"><div class="max-w-7xl mx-auto text-center text-xs text-slate-400"><p class="text-slate-300 font-semibold">GARIMPO DO BIGODE © 2026</p><p class="mt-1">Sistema de apoio ao garimpo de produtos.</p></div></footer>
+</div>
+
+<div id="apiModal" class="hidden-view fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+ <div class="glass-panel border border-slate-800 rounded-2xl max-w-md w-full p-6 relative">
+  <button onclick="toggleApiModal()" class="absolute top-4 right-4 text-slate-400"><i class="fa-solid fa-xmark"></i></button>
+  <div class="flex items-center gap-3 mb-4"><i class="fa-solid fa-key text-cyber-neonGold text-xl"></i><h3 class="font-orbitron font-bold text-lg">Sua chave Gemini</h3></div>
+  <p class="text-xs text-slate-300 mb-3 leading-relaxed">O Garimpo usa a inteligência artificial Gemini, do Google. Cada usuário conecta sua própria chave para que o consumo da API não fique concentrado em uma chave compartilhada.</p>
+  <div class="bg-slate-950 border border-slate-700 rounded-xl p-3 mb-4"><p class="text-xs text-slate-300 font-semibold mb-1">Por que preciso dela?</p><p class="text-xs text-slate-400">A chave autoriza o Garimpo a enviar suas solicitações ao Gemini. O Google pode oferecer uma cota gratuita, sujeita a limites e alterações. Uso acima da cota gratuita pode gerar cobrança na sua conta Google. Consulte as condições antes de usar.</p></div>
+  <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-cyber-neonGold text-black font-bold py-2.5 rounded-xl text-xs mb-4"><i class="fa-solid fa-arrow-up-right-from-square mr-2"></i>ADQUIRIR MINHA API GEMINI</a>
+  <label class="block text-xs text-slate-300 mb-1">Cole sua chave API aqui</label><input type="password" id="geminiApiKeyInput" placeholder="Cole sua chave do Google AI Studio" class="field mb-3" autocomplete="off">
+  <div class="flex gap-2"><button onclick="salvarApiKey()" class="flex-1 bg-cyber-neonGreen text-black font-bold py-2.5 rounded-xl text-xs">SALVAR MINHA CHAVE</button><button onclick="toggleApiModal()" class="bg-slate-800 px-4 rounded-xl text-xs">FECHAR</button></div>
+  <p class="text-[10px] text-slate-500 mt-3">A chave fica salva somente neste navegador. Não use computadores públicos e não compartilhe sua chave.</p>
+ </div>
+</div>
+<div id="passwordModal" class="hidden-view fixed inset-0 bg-black/85 z-[60] flex items-center justify-center p-4"><div class="glass-panel rounded-2xl p-6 max-w-sm w-full"><h3 class="font-orbitron font-bold mb-3">Redefinir senha</h3><p class="text-xs text-slate-400 mb-3">A nova senha deve ter pelo menos 12 caracteres.</p><input id="resetPasswordInput" type="password" minlength="12" class="field mb-3" placeholder="Nova senha"><input id="resetUserId" type="hidden"><div class="flex gap-2"><button onclick="confirmarNovaSenha()" class="flex-1 bg-cyber-neonGreen text-black font-bold rounded-xl py-2">Salvar</button><button onclick="fecharReset()" class="bg-slate-800 rounded-xl px-4">Cancelar</button></div><p id="resetMessage" class="text-xs mt-2"></p></div></div>
+
+<script>
+const API_BASE='https://garimpo-api.reissenaleonardo2.workers.dev';
+const TOKEN_KEY='garimpo_session_token';
+let currentUser=null, currentCategory='todos', produtosExibidos=[];
+const NICHOS_VARIADOS=['utilidades de cozinha e casa inteligentes','acessórios de manutenção automotiva e moto','ferramentas elétricas compactas e manuais','gadgets de áudio bluetooth e tecnologia portátil','produtos para pets e cuidados animais','acessórios para esportes, treino e academia','luminárias solares e iluminação LED','itens para bebês e organização infantil'];
+const $=id=>document.getElementById(id);
+function token(){return localStorage.getItem(TOKEN_KEY)||''}
+async function api(path,method='GET',body=null){
+ const headers={'Content-Type':'application/json'};if(token())headers.Authorization='Bearer '+token();
+ const response=await fetch(API_BASE+path,{method,headers,...(body?{body:JSON.stringify(body)}:{})});
+ let data={};try{data=await response.json()}catch{}
+ if(!response.ok)throw new Error(data.error||data.message||`Erro ${response.status}`);
+ return data;
+}
+function showLogin(message=''){ $('loginView').classList.remove('hidden-view');$('appView').classList.add('hidden-view');$('loginMessage').textContent=message;}
+function showApp(){ $('loginView').classList.add('hidden-view');$('appView').classList.remove('hidden-view');$('userLabel').textContent=(currentUser?.name||currentUser?.username||'')+(currentUser?.role==='admin'?' · ADMIN':'');$('adminNavButton').classList.toggle('hidden-view',currentUser?.role!=='admin');$('garimpoMain').classList.remove('hidden-view');$('adminView').classList.add('hidden-view');}
+async function validarSessao(){if(!token()){showLogin();return}try{const d=await api('/auth/me');currentUser=d.user||d;showApp()}catch(e){localStorage.removeItem(TOKEN_KEY);currentUser=null;showLogin('Sua sessão expirou. Entre novamente.');}}
+$('loginForm').addEventListener('submit',async e=>{e.preventDefault();const b=$('loginButton');b.disabled=true;b.textContent='ENTRANDO...';$('loginMessage').textContent='';try{const d=await api('/auth/login','POST',{username:$('loginUsername').value.trim(),password:$('loginPassword').value});if(!d.token)throw new Error('O servidor não retornou uma sessão.');localStorage.setItem(TOKEN_KEY,d.token);currentUser=d.user;showApp()}catch(err){$('loginMessage').textContent=err.message==='Failed to fetch'?'Não foi possível conectar ao servidor. Verifique sua internet.':err.message}finally{b.disabled=false;b.textContent='ENTRAR NO GARIMPO'}});
+async function logout(){try{await api('/auth/logout','POST',{})}catch{}localStorage.removeItem(TOKEN_KEY);currentUser=null;showLogin('Você saiu da sua conta.')}
+function abrirAdmin(){if(currentUser?.role!=='admin')return;$('garimpoMain').classList.add('hidden-view');$('adminView').classList.remove('hidden-view');carregarUsuarios()}
+function fecharAdmin(){$('adminView').classList.add('hidden-view');$('garimpoMain').classList.remove('hidden-view')}
+$('createUserForm').addEventListener('submit',async e=>{e.preventDefault();const msg=$('createMessage');msg.textContent='Cadastrando...';msg.className='text-xs text-slate-400';const date=$('newExpiry').value;let expiresAt=null;if(date){const localEnd=new Date(date+'T23:59:59');expiresAt=localEnd.toISOString()}try{await api('/admin/users','POST',{name:$('newName').value.trim(),username:$('newUsername').value.trim(),password:$('newPassword').value,expiresAt});msg.textContent='Cliente cadastrado com sucesso.';msg.className='text-xs text-cyber-neonGreen';$('createUserForm').reset();carregarUsuarios()}catch(err){msg.textContent=err.message;msg.className='text-xs text-rose-400'}});
+async function carregarUsuarios(){const body=$('usersTable'),msg=$('usersMessage');body.replaceChildren();msg.textContent='Carregando clientes...';try{const d=await api('/admin/users');const users=d.users||[];msg.textContent=`${users.length} usuário(s) encontrado(s).`;users.forEach(u=>{const tr=document.createElement('tr');tr.className='border-b border-slate-800';const cells=[u.name||'',u.username||'',u.status||'',u.expires_at?new Date(u.expires_at).toLocaleString('pt-BR'):'Sem vencimento'];cells.forEach((v,i)=>{const td=document.createElement('td');td.className='p-2 '+(i===2?(v==='active'?'text-cyber-neonGreen':'text-rose-400'):'text-slate-300');td.textContent=v;tr.appendChild(td)});const actions=document.createElement('td');actions.className='p-2';const statusBtn=document.createElement('button');statusBtn.className='bg-slate-800 px-2 py-1 rounded mr-1 mb-1';statusBtn.textContent=u.status==='active'?'Bloquear':'Desbloquear';statusBtn.addEventListener('click',()=>alterarStatus(u.id,u.status==='active'?'blocked':'active'));actions.appendChild(statusBtn);const passBtn=document.createElement('button');passBtn.className='bg-slate-800 px-2 py-1 rounded mb-1';passBtn.textContent='Nova senha';passBtn.addEventListener('click',()=>abrirReset(u.id));actions.appendChild(passBtn);tr.appendChild(actions);body.appendChild(tr)})}catch(err){msg.textContent='Erro ao carregar: '+err.message}}
+async function alterarStatus(id,status){if(!confirm(status==='blocked'?'Bloquear este usuário?':'Desbloquear este usuário?'))return;try{await api(`/admin/users/${id}/status`,'PATCH',{status});carregarUsuarios()}catch(e){alert('Não foi possível alterar o status: '+e.message)}}
+function abrirReset(id){$('resetUserId').value=id;$('resetPasswordInput').value='';$('resetMessage').textContent='';$('passwordModal').classList.remove('hidden-view')}
+function fecharReset(){$('passwordModal').classList.add('hidden-view')}
+async function confirmarNovaSenha(){const id=$('resetUserId').value,password=$('resetPasswordInput').value;if(password.length<12){$('resetMessage').textContent='Use pelo menos 12 caracteres.';return}try{await api(`/admin/users/${id}/password`,'PATCH',{password});$('resetMessage').textContent='Senha redefinida. O usuário precisará entrar novamente.';setTimeout(fecharReset,1200)}catch(e){$('resetMessage').textContent=e.message}}
+function toggleApiModal(){$('apiModal').classList.toggle('hidden-view');$('geminiApiKeyInput').value=localStorage.getItem('gemini_api_key')||''}
+function salvarApiKey(){const key=$('geminiApiKeyInput').value.trim();if(!key){alert('Cole sua chave Gemini antes de salvar.');return}localStorage.setItem('gemini_api_key',key);toggleApiModal();alert('Sua chave foi salva neste navegador.')}
+function moeda(n){return Number(n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+function addLog(msg){const p=document.createElement('p');p.className='text-cyber-neonGreen';p.textContent=msg;$('terminalLogs').appendChild(p);$('terminalLogs').scrollTop=$('terminalLogs').scrollHeight}
+async function iniciarGarimpoIA(){
+ const apiKey=localStorage.getItem('gemini_api_key');if(!apiKey){toggleApiModal();alert('Antes de garimpar, conecte sua própria chave Gemini.');return}
+ const btn=$('garimparBtn');btn.disabled=true;btn.classList.add('garimpando','glow-gold');$('radarScanner').classList.remove('hidden-view');$('terminalContainer').classList.remove('hidden-view');$('terminalLogs').replaceChildren();$('btnText').textContent='GARIMPANDO IA...';$('terminalStatus').textContent='Consultando Gemini...';
+ const nicho=NICHOS_VARIADOS[Math.floor(Math.random()*NICHOS_VARIADOS.length)];addLog('Conectando ao Google Gemini...');addLog('Nicho selecionado: '+nicho);
+ const prompt=`Você é o assistente Garimpo do Bigode. Gere exatamente 6 ideias de produtos físicos que possam ser anunciados no Brasil no segmento "${nicho}". Não afirme que verificou vendas, estoque ou preços em tempo real. Retorne somente um JSON array válido, sem markdown, com os campos: nome, categoria (gadget, casa, ferramentas ou auto), tag, custoFornecedor (número estimado), precoVenda (número sugerido), descricaoAd (texto de anúncio). Deixe claro no texto que valores e disponibilidade precisam ser confirmados.`;
+ try{
+  const response=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key='+encodeURIComponent(apiKey),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:.8,responseMimeType:'application/json'}})});
+  const data=await response.json();if(!response.ok)throw new Error(data.error?.message||'Falha na API Gemini.');
+  const raw=data.candidates?.[0]?.content?.parts?.[0]?.text;if(!raw)throw new Error('A IA não retornou conteúdo.');const parsed=JSON.parse(raw);if(!Array.isArray(parsed)||!parsed.length)throw new Error('Resposta da IA sem produtos.');
+  produtosExibidos=parsed.slice(0,6).map((p,i)=>({id:Date.now()+i,nome:String(p.nome||'Produto sem nome'),categoria:['gadget','casa','ferramentas','auto'].includes(p.categoria)?p.categoria:'casa',tag:String(p.tag||'Sugestão IA'),custoFornecedor:Number(p.custoFornecedor)||0,precoVenda:Number(p.precoVenda)||0,fornecedorLink:'https://shopee.com.br/search?keyword='+encodeURIComponent(String(p.nome||'')),descricaoAd:String(p.descricaoAd||'Confira preço e disponibilidade antes de anunciar.')}));addLog('Consulta concluída. Sugestões recebidas da IA.');
+ }catch(err){addLog('Erro: '+err.message);$('terminalStatus').textContent='Falha na consulta';alert('Não foi possível consultar o Gemini: '+err.message+'\nConfira sua chave, a cota e o acesso ao modelo.');}
+ finally{btn.disabled=false;btn.classList.remove('garimpando','glow-gold');$('radarScanner').classList.add('hidden-view');$('btnText').textContent='GARIMPAR NOVOS PRODUTOS';$('terminalStatus').textContent='Consulta finalizada';if(produtosExibidos.length)exibirResultados()}
+}
+function exibirResultados(){$('resultsSection').classList.remove('hidden-view');renderProducts(produtosExibidos);$('resultsSection').scrollIntoView({behavior:'smooth'})}
+function renderProducts(lista){const grid=$('productsGrid');grid.replaceChildren();const filtrados=currentCategory==='todos'?lista:lista.filter(p=>p.categoria===currentCategory);$('totalFoundCount').textContent=filtrados.length;
+ filtrados.forEach((p,i)=>{const lucro=p.precoVenda-p.custoFornecedor;const margem=p.custoFornecedor>0?(lucro/p.custoFornecedor*100):0;const card=document.createElement('article');card.className='glass-panel rounded-2xl p-5 flex flex-col justify-between border border-slate-800';
+ const top=document.createElement('div');const head=document.createElement('div');head.className='flex justify-between gap-2 mb-4 border-b border-slate-800 pb-3';const tag=document.createElement('span');tag.className='text-cyber-neonGold text-xs';tag.textContent=p.tag;const num=document.createElement('span');num.className='text-cyber-neonGreen text-xs';num.textContent='#'+(i+1);head.append(tag,num);top.appendChild(head);
+ const name=document.createElement('h4');name.className='font-orbitron font-bold text-white text-base mb-4';name.textContent=p.nome;top.appendChild(name);
+ const prices=document.createElement('div');prices.className='grid grid-cols-2 gap-2 mb-4 p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs';const c=document.createElement('p');c.textContent='Custo fornecedor: '+moeda(p.custoFornecedor);const v=document.createElement('p');v.className='text-cyber-neonGreen';v.textContent='Preço sugerido: '+moeda(p.precoVenda);prices.append(c,v);top.appendChild(prices);
+ const profit=document.createElement('p');profit.className='text-cyber-neonGreen font-orbitron font-bold mb-4';profit.textContent='Diferença estimada: '+moeda(lucro)+' ('+margem.toFixed(0)+'%)';top.appendChild(profit);const desc=document.createElement('p');desc.className='text-xs text-slate-400 mb-4 whitespace-pre-wrap';desc.textContent=p.descricaoAd;top.appendChild(desc);card.appendChild(top);
+ const copy=document.createElement('button');copy.className='w-full bg-slate-800 text-slate-200 text-xs py-2.5 rounded-xl mb-2';copy.textContent='Copiar texto do anúncio';copy.addEventListener('click',()=>copiarAnuncio(p.descricaoAd));const link=document.createElement('a');link.className='block text-center bg-gradient-to-r from-cyber-neonGreen to-emerald-600 text-black font-bold text-xs py-2.5 rounded-xl';link.href=p.fornecedorLink;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Buscar produto na Shopee';card.append(copy,link);grid.appendChild(card);
+ })}
+function filterCategory(cat,button){currentCategory=cat;document.querySelectorAll('.cat-filter-btn').forEach(b=>{b.className='cat-filter-btn px-4 py-2 rounded-xl text-xs bg-slate-800 text-slate-300'});if(button)button.className='cat-filter-btn px-4 py-2 rounded-xl text-xs bg-cyber-neonGreen text-black';renderProducts(produtosExibidos)}
+async function copiarAnuncio(texto){try{await navigator.clipboard.writeText(texto);alert('Texto copiado.')}catch{const t=document.createElement('textarea');t.value=texto;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();alert('Texto copiado.')}}
+function calcularMargemRapida(){const custo=parseFloat($('calcCusto').value)||0,venda=parseFloat($('calcVenda').value)||0,frete=parseFloat($('calcFrete').value)||0,resultado=venda-custo-frete,margem=custo>0?resultado/custo*100:0;$('resLucroUnidade').textContent=moeda(resultado);$('resMargemPorcent').textContent=margem.toFixed(1)+'%';$('proj1Venda').textContent=moeda(resultado*30);$('proj3Vendas').textContent=moeda(resultado*90);$('proj5Vendas').textContent=moeda(resultado*150)}
+window.addEventListener('load',()=>{calcularMargemRapida();validarSessao()});
+</script>
+</body>
+</html>
